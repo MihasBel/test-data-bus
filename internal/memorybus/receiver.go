@@ -17,11 +17,10 @@ func (mb *MemoryBus) ReceiveMsg(_ context.Context, message models.Message) error
 	mb.mu.Lock()
 	defer mb.mu.Unlock()
 	msgList := mb.messages[message.Type]
-	if len(msgList.Msgs) > mb.cfg.MaxMsgs {
+	if len(msgList.Msgs) == mb.cfg.MaxMsgs {
 		msgList.Msgs = msgList.Msgs[1:]
 		msgList.ShiftCounter++
-	} else {
-		msgList.Msgs = append(msgList.Msgs, message)
 	}
+	msgList.Msgs = append(msgList.Msgs, message)
 	return nil
 }
