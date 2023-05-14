@@ -2,7 +2,6 @@ package publisher
 
 import (
 	"context"
-
 	"github.com/MihasBel/test-data-bus/delivery/grpc/gen/v1/publisher"
 	"github.com/MihasBel/test-data-bus/internal/models"
 )
@@ -18,7 +17,6 @@ func (s *Server) Subscribe(request *publisher.SubscriptionRequest, stream publis
 	if err := s.m.Subscribe(ctx, subscriber); err != nil {
 		return err
 	}
-
 	<-stream.Context().Done()
 
 	return stream.Context().Err()

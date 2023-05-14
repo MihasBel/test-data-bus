@@ -41,7 +41,7 @@ func (s *Service) Subscribe(ctx context.Context, subscriber *models.Subscriber) 
 	} else {
 		s.subMap[key] = subscriber
 	}
-	return s.b.HandleConsumer(ctx, subscriber)
+	return s.b.HandleConsumer(ctx, s.subMap[key])
 }
 
 func (s *Service) Unsubscribe(_ context.Context, subscriberID string, msgType string) error {
@@ -51,7 +51,6 @@ func (s *Service) Unsubscribe(_ context.Context, subscriberID string, msgType st
 	v, ok := s.subMap[key]
 	if ok {
 		v.Cancel()
-		delete(s.subMap, key)
 		return nil
 	}
 	return nil

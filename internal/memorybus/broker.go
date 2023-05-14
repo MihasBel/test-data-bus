@@ -25,7 +25,7 @@ func (mb *MemoryBus) consume(ctx context.Context, sub *models.Subscriber) {
 			return
 		default:
 			if len(mb.messages[sub.MessageType]) == 0 ||
-				sub.Offset < len(mb.messages[sub.MessageType]) {
+				sub.Offset >= len(mb.messages[sub.MessageType]) {
 				mb.log.Info().Msgf("No new messages for ID:%s", sub.ID)
 				continue
 			}
