@@ -2,10 +2,10 @@ package app
 
 import (
 	"context"
-	"github.com/MihasBel/test-data-bus/internal/memorybus"
 	"time"
 
 	grpcServ "github.com/MihasBel/test-data-bus/delivery/grpc/busserver"
+	"github.com/MihasBel/test-data-bus/internal/memorybus"
 	"github.com/MihasBel/test-data-bus/internal/publisher"
 	"github.com/MihasBel/test-data-bus/internal/subscription"
 	"github.com/MihasBel/test-data-bus/pkg/lifecycle"

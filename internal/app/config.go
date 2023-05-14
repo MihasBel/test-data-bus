@@ -1,10 +1,10 @@
 package app
 
 import (
-	"github.com/MihasBel/test-data-bus/internal/memorybus"
 	"time"
 
 	"github.com/MihasBel/test-data-bus/delivery/grpc/busserver"
+	"github.com/MihasBel/test-data-bus/internal/memorybus"
 )
 
 type Config struct {

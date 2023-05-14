@@ -2,9 +2,10 @@ package memorybus
 
 import (
 	"context"
+	"time"
+
 	"github.com/MihasBel/test-data-bus/internal/models"
 	"github.com/pkg/errors"
-	"time"
 )
 
 func (mb *MemoryBus) HandleConsumer(ctx context.Context, subscriber *models.Subscriber) error {
@@ -24,7 +25,7 @@ func (mb *MemoryBus) consume(ctx context.Context, sub *models.Subscriber) {
 			return
 		default:
 			if len(mb.messages[sub.MessageType]) == 0 ||
-				sub.Offset < len(mb.messages[sub.MessageType]) {
+				sub.Offset >= len(mb.messages[sub.MessageType]) {
 				mb.log.Info().Msgf("No new messages for ID:%s", sub.ID)
 				continue
 			}

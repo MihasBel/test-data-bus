@@ -2,11 +2,12 @@ package memorybus
 
 import (
 	"context"
+	"sync"
+
 	"github.com/MihasBel/test-data-bus/internal/models"
 	"github.com/MihasBel/test-data-bus/internal/rep"
 	"github.com/pkg/errors"
 	"github.com/rs/zerolog"
-	"sync"
 )
 
 const (
