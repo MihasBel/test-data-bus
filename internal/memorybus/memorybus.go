@@ -19,7 +19,7 @@ const (
 type MemoryBus struct {
 	cfg      Config
 	log      *zerolog.Logger
-	messages map[string][]models.Message
+	messages map[string]*models.MessageLst
 	pub      rep.Publisher
 	mu       sync.Mutex
 }
@@ -28,7 +28,7 @@ func New(cfg Config, log *zerolog.Logger, pub rep.Publisher) *MemoryBus {
 	return &MemoryBus{
 		cfg:      cfg,
 		log:      log,
-		messages: make(map[string][]models.Message),
+		messages: make(map[string]*models.MessageLst),
 		pub:      pub,
 	}
 }
@@ -39,7 +39,9 @@ func (mb *MemoryBus) Start(_ context.Context) error {
 		return errors.New(MsgErrNoTypes)
 	}
 	for _, v := range mb.cfg.MsgTypes {
-		mb.messages[v] = make([]models.Message, 0)
+		mb.messages[v] = &models.MessageLst{
+			Msgs: make([]models.Message, 0),
+		}
 	}
 	return nil
 }

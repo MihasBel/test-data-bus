@@ -24,14 +24,30 @@ func (mb *MemoryBus) consume(ctx context.Context, sub *models.Subscriber) {
 			mb.log.Info().Msgf("cancel ctx in HandleConsumer go func id:%s", sub.ID)
 			return
 		default:
-			if len(mb.messages[sub.MessageType]) == 0 ||
-				sub.Offset >= len(mb.messages[sub.MessageType]) {
-				mb.log.Info().Msgf("No new messages for ID:%s", sub.ID)
+			mb.mu.Lock()
+			msgList := mb.messages[sub.MessageType]
+			if len(msgList.Msgs) == 0 {
+				mb.mu.Unlock()
 				continue
 			}
+			missedMsgs := msgList.ShiftCounter - sub.ShiftCounter
+			if missedMsgs > 0 {
+				sub.Offset -= missedMsgs
+				sub.ShiftCounter = msgList.ShiftCounter
+			}
+			if sub.Offset >= len(msgList.Msgs) {
+				mb.log.Info().Msgf("No new messages for ID:%s", sub.ID)
+				mb.mu.Unlock()
+				continue
+			}
+			if sub.Offset < 0 {
+				sub.Offset = 0
+			}
+			msg := msgList.Msgs[sub.Offset]
+			mb.mu.Unlock()
 			err := mb.pub.Publish(ctx, sub, &models.Message{
-				Type: sub.MessageType,
-				Data: mb.messages[sub.MessageType][sub.Offset].Data,
+				Type: msg.Type,
+				Data: msg.Data,
 			})
 			if err != nil {
 				mb.log.Error().Err(err).Msgf("Publish to subscriber ID:%v", sub.ID)

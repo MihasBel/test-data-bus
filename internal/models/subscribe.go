@@ -12,11 +12,12 @@ var (
 )
 
 type Subscriber struct {
-	ID          string
-	Stream      publisher.PubSubService_SubscribeServer
-	MessageType string
-	Cancel      context.CancelFunc
-	Offset      int
+	ID           string
+	Stream       publisher.PubSubService_SubscribeServer
+	MessageType  string
+	Cancel       context.CancelFunc
+	Offset       int
+	ShiftCounter int
 }
 
 func (s *Subscriber) IsValid() error {
