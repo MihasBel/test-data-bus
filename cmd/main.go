@@ -1,12 +1,12 @@
 package main
 
 import (
-	"github.com/caarlos0/env/v6"
 	"log"
 	"os"
 
 	"github.com/MihasBel/test-data-bus/internal/app"
 	executor "github.com/MihasBel/test-data-bus/pkg/app"
+	"github.com/caarlos0/env/v6"
 	"github.com/joho/godotenv"
 	"github.com/rs/zerolog"
 )

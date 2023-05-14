@@ -2,9 +2,10 @@ package memorybus
 
 import (
 	"context"
+	"time"
+
 	"github.com/MihasBel/test-data-bus/internal/models"
 	"github.com/pkg/errors"
-	"time"
 )
 
 func (mb *MemoryBus) HandleConsumer(ctx context.Context, subscriber *models.Subscriber) error {

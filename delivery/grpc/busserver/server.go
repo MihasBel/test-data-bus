@@ -7,7 +7,6 @@ import (
 	"time"
 
 	"github.com/MihasBel/test-data-bus/delivery/grpc/busserver/bus"
-
 	"github.com/MihasBel/test-data-bus/delivery/grpc/busserver/publisher"
 	v1bus "github.com/MihasBel/test-data-bus/delivery/grpc/gen/v1/bus"
 	v1publisher "github.com/MihasBel/test-data-bus/delivery/grpc/gen/v1/publisher"

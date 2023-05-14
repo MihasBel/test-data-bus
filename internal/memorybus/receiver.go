@@ -2,6 +2,7 @@ package memorybus
 
 import (
 	"context"
+
 	"github.com/MihasBel/test-data-bus/internal/models"
 	"github.com/pkg/errors"
 )
