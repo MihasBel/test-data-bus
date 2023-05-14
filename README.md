@@ -2,6 +2,23 @@
 
 Test Data Bus is an application that implements the In-Memory Message Bus.
 
+application implements a message bus using gRPC, with separate services for publishing and subscribing to messages. 
+The protobuf definitions for these services can be found at the following locations in the repository:
+
+Bus Service (Receiver): delivery/grpc/gen/v1/bus
+Publisher Service (Sender): delivery/grpc/gen/v1/publisher
+Bus Service: The Bus Service is responsible for sending messages into the bus. The protobuf definition 
+([Bus proto](https://github.com/MihasBel/test-data-bus/tree/main/delivery/grpc/proto/v1/bus)) outlines the gRPC call
+for this functionality.
+
+Publisher Service: The Publisher Service handles subscriptions to message types.
+Clients can open a gRPC stream to receive messages of a specified type, and can also manage their subscriptions using 
+the gRPC calls defined in the protobuf file
+([Publisher proto](https://github.com/MihasBel/test-data-bus/tree/main/delivery/grpc/proto/v1/publisher)).
+
+Messages contain data encoded in base64 format and also include a message type.
+The types of messages that can be processed by the application are specified in the application configuration.
+
 ## Installation and Running
 
 1. Clone the repository:
