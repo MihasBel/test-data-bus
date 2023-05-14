@@ -18,7 +18,7 @@ func (mb *MemoryBus) HandleConsumer(ctx context.Context, subscriber *models.Subs
 }
 
 func (mb *MemoryBus) consume(ctx context.Context, sub *models.Subscriber) {
-	for range time.NewTicker(mb.cfg.ReadDelaySec).C {
+	for range time.NewTicker(mb.cfg.ReadDelayMS).C {
 		select {
 		case <-ctx.Done():
 			mb.log.Info().Msgf("cancel ctx in HandleConsumer go func id:%s", sub.ID)

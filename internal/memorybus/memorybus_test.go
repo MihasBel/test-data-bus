@@ -19,7 +19,7 @@ func TestHandleConsumer(t *testing.T) {
 	mockPublisher := mocks.NewMockPublisher(ctrl)
 
 	msgTypes := []string{"type1"}
-	cfg := Config{MsgTypes: msgTypes, MaxMsgs: 5, ReadDelaySec: time.Second}
+	cfg := Config{MsgTypes: msgTypes, MaxMsgs: 5, ReadDelayMS: time.Second}
 	logger := zerolog.Nop()
 
 	mb := New(cfg, &logger, mockPublisher)
