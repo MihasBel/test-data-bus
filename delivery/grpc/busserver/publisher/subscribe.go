@@ -2,6 +2,7 @@ package publisher
 
 import (
 	"context"
+
 	"github.com/MihasBel/test-data-bus/delivery/grpc/gen/v1/publisher"
 	"github.com/MihasBel/test-data-bus/internal/models"
 )

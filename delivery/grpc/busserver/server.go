@@ -121,6 +121,7 @@ func (s *Server) ZerologInterceptor(
 	info *grpc.UnaryServerInfo,
 	handler grpc.UnaryHandler,
 ) (interface{}, error) {
+
 	start := time.Now()
 	resp, err := handler(ctx, req)
 	body, _ := json.Marshal(resp)
